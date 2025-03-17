@@ -51,7 +51,7 @@ const ToolBox = () => {
         return (
             <ul className="summary-list">
                 {Object.entries(count).map(([size, num]) => (
-                    <li key={size}>{num} brick{num > 1 ? "s" : ""} of {size}mm</li>
+                    <li key={size}>{num} slat{num > 1 ? "s" : ""} of {size}mm</li>
                 ))}
                 <li><strong>Gap size:</strong> {gaps.toFixed(2)}mm</li>
             </ul>
@@ -69,7 +69,6 @@ const ToolBox = () => {
     const usedLength = benchBricks.reduce((sum, el) => sum + el, 0);
     const progressPercentage = Math.min((usedLength / benchLength) * 100, 100);
 
-    // Determine progress bar color based on gap admittance
     const getProgressBarColor = () => {
         if (gaps < minGap) return "red";
         if (gaps >= minGap && gaps <= maxGap) return "green";
