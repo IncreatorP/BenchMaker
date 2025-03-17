@@ -54,6 +54,7 @@ body {
 }
 
 .toolbox-input {
+    min-width: 120px;
     height: 32px;
     border: none;
     padding: 8px;
@@ -71,6 +72,13 @@ body {
 .toolbox-label {
     margin-bottom: var(--default-margin-bottom);
     margin-right: 10px;
+    min-width: 120px;
+}
+
+.input-group {
+    display: grid;
+    grid-template-columns: 120 120;
+    align-items: baseline;
 }
 
 .remaining-length-box {

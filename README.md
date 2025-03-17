@@ -37,12 +37,12 @@ While this calculation can be done programmatically, raw numbers don’t provide
 
 ### Screens
 
-![product screenshot](image-1.png)
+![product screenshot](image-2.png)
 
 ### Changelog
 
-0.1.1: 
+0.1.1
 
-* reworked spacing to use virutal gaps and fixed bench size (to better see unused space)
-* numerous CSS fixes
+* Reworked spacing to use virutal gaps and fixed bench size (to better see unused space)
+* Numerous CSS fixes
 * Numeric and visual indicator for leftover planks to see if they still fit
