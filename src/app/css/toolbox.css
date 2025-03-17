@@ -1,0 +1,136 @@
+:root {
+    --default-margin-bottom: 16px;
+    --default-border-color: rgb(66, 66, 66);
+}
+
+body {
+    max-width: 1200px;
+    margin-bottom: var(--default-margin-bottom);
+}
+
+.main {
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: var(--default-margin-bottom);
+}
+
+.toolbox-title {
+    margin-top: 32px;
+    margin-bottom: 32px;
+    font-size: xx-large;
+    border-bottom: 3px solid var(--default-border-color);
+}
+
+.toolbox-frame {
+    display: flex;
+    flex: 1;
+    width: fit-content;
+    height: 300px;
+    border: 1px solid var(--default-border-color);
+    border-radius: 16px;
+    padding: 10px;
+    margin-bottom: var(--default-margin-bottom);
+}
+
+.toolbox-brick {
+    border: 1px solid var(--default-border-color);
+    color:black;
+    height: 24px;
+    min-width: 50px;
+    font-size: small;
+    text-align: center;
+    padding-top: 4px;
+    margin: 6px;
+    border-radius: 5px;
+}
+
+.toolbox-brick:hover {
+    outline: 2px solid white;
+    background-color: blueviolet;
+    cursor: pointer;
+}
+
+.toolbox-input {
+    height: 32px;
+    border: none;
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: none;
+    outline: none;
+    outline: 1px solid var(--default-border-color);
+    font-size: large;
+    margin-bottom: var(--default-margin-bottom);
+}
+.toolbox-input:focus {
+    outline: 1px solid white;
+}
+
+.toolbox-label {
+    margin-bottom: var(--default-margin-bottom);
+    margin-right: 10px;
+}
+
+.bench-container {
+    display: flex;
+    width: fit-content;
+    border: 1px solid white;
+    border-radius: 16px;
+    padding: 10px;
+    margin-bottom: var(--default-margin-bottom);
+}
+
+.bench-brick {
+    border: 1px solid var(--default-border-color);
+    color:black;
+    height: 24px;
+    min-width: 50px;
+    font-size: small;
+    text-align: center;
+    padding-top: 4px;
+    margin: 6px;
+    border-radius: 5px;
+}
+
+.bench-brick:hover {
+    outline: 2px solid white;
+    background-color: blueviolet;
+    cursor: pointer;
+}
+
+.remaining-length-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid var(--default-border-color);
+    border-radius: 8px;
+    min-width: 400px;
+    margin-bottom: var(--default-margin-bottom);
+}
+
+.progress-bar {
+    width: 80%;
+    height: 12px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 8px;
+    margin-bottom: var(--default-margin-bottom);
+}
+
+.progress-fill {
+    height: 100%;
+    transition: width 0.5s ease-in-out;
+}
+
+.summary-list {
+    padding-left: 20px;
+    margin-top: 8px;
+}
+
+.summary-list li {
+    margin-bottom: 4px;
+}
