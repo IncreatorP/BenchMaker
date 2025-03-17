@@ -4,17 +4,17 @@
 }
 
 body {
-    max-width: 1200px;
     margin-bottom: var(--default-margin-bottom);
+    /*overflow-y: none;*/
 }
 
 .main {
-    max-width: 1200px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    margin-bottom: var(--default-margin-bottom);
+    justify-content: center;
+    width: 1200px;
+    margin: 0 auto;
 }
 
 .toolbox-title {
@@ -73,33 +73,6 @@ body {
     margin-right: 10px;
 }
 
-.bench-container {
-    display: flex;
-    width: fit-content;
-    border: 1px solid white;
-    border-radius: 16px;
-    padding: 10px;
-    margin-bottom: var(--default-margin-bottom);
-}
-
-.bench-brick {
-    border: 1px solid var(--default-border-color);
-    color:black;
-    height: 24px;
-    min-width: 50px;
-    font-size: small;
-    text-align: center;
-    padding-top: 4px;
-    margin: 6px;
-    border-radius: 5px;
-}
-
-.bench-brick:hover {
-    outline: 2px solid white;
-    background-color: blueviolet;
-    cursor: pointer;
-}
-
 .remaining-length-box {
     display: flex;
     flex-direction: column;
@@ -134,3 +107,67 @@ body {
 .summary-list li {
     margin-bottom: 4px;
 }
+
+.bench-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.bench-container {
+    display: flex;
+    position: relative;
+    width: 600px;
+    min-height: 50px;
+    border: 2px solid white;
+    border-radius: 2px;
+    padding: 5px;
+    background: rgba(255, 255, 255, 0.1);
+    overflow: hidden;
+    margin-bottom: var(--default-margin-bottom);
+    justify-content: center;
+}
+
+.bench-centerline {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 1px;
+    background-color: rgba(255, 255, 255, 0.438);
+    pointer-events: none;
+}
+
+.bench-content {
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+}
+
+.bench-brick {
+    height: 50px;
+    border: 1px solid black;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    margin: 0;
+}
+
+.bench-gap {
+    height: 50px;
+    transition: background-color 0.2s;
+    margin: 0;
+}
+
+/* debug 
+.main { border: 2px solid red; }
+.toolbox-frame { border: 2px solid blue; }
+.bench-wrapper { border: 2px solid green; }
+*/

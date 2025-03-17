@@ -80,7 +80,6 @@ const ToolBox = () => {
         <>
             <div className="toolbox-title">Bench Maker 3000!</div>
 
-            {/* Bench length + min/max gap input (on same row) */}
             <div className="input-row">
                 <div className="input-group">
                     <label className="toolbox-label">Bench Length:</label>
@@ -112,21 +111,28 @@ const ToolBox = () => {
             </div>
 
             <div className="toolbox-label">Toolbox</div>
-            <div className="toolbox-frame">
-                {widths.map((el, index) => (
-                    <div
-                        className="toolbox-brick"
-                        key={el}
-                        style={{
-                            width: `${24 + ((scaleWithPixels / screenWidth) * el)}px`,
-                            backgroundColor: getBrickColor(index)
-                        }}
-                        onClick={() => useBrick(el)}
-                    >
-                        {el}
-                    </div>
-                ))}
-            </div>
+                <div className="toolbox-frame">
+                    {widths.map((el, index) => {
+                        const possibleCount = Math.floor(remainingLength / el);
+                        const isDisabled = possibleCount <= 0;
+
+                        return (
+                            <div
+                                className="toolbox-brick"
+                                key={el}
+                                style={{
+                                    width: `${24 + ((scaleWithPixels / screenWidth) * el)}px`,
+                                    backgroundColor: getBrickColor(index),
+                                    opacity: isDisabled ? 0.2 : 1,
+                                    cursor: isDisabled ? "not-allowed" : "pointer" 
+                                }}
+                                onClick={() => !isDisabled && useBrick(el)}
+                            >
+                                {el} {possibleCount > 0 ? `(${possibleCount})` : ""}
+                            </div>
+                        );
+                    })}
+                </div>
 
             <div className="toolbox-label">Bench length is currently {benchLength}mm / Used length: {usedLength}mm</div>
 
@@ -145,35 +151,53 @@ const ToolBox = () => {
                 <div className="toolbox-label">Gap size: {gaps.toFixed(2)}mm</div>
             </div>
 
-            <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="bench" direction="horizontal">
-                    {(provided) => (
-                        <div className="bench-container" {...provided.droppableProps} ref={provided.innerRef}>
-                            {benchBricks.map((el, index) => (
-                                <Draggable key={index} draggableId={`${index}`} index={index}>
-                                    {(provided) => (
-                                        <div
-                                            className="bench-brick"
-                                            ref={provided.innerRef}
-                                            {...provided.draggableProps}
-                                            {...provided.dragHandleProps}
-                                            style={{
-                                                width: `${24 + ((scaleWithPixels / screenWidth) * el)}px`,
-                                                backgroundColor: getBrickColor(widths.indexOf(el)),
-                                                ...provided.draggableProps.style
-                                            }}
-                                            onClick={() => removeBrick(index)}
-                                        >
-                                            {el}
-                                        </div>
-                                    )}
-                                </Draggable>
-                            ))}
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
-            </DragDropContext>
+
+            <div className="bench-wrapper">
+                <div className="bench-container">
+                    <div className="bench-centerline"></div> 
+
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        <Droppable droppableId="bench" direction="horizontal">
+                            {(provided) => (
+                                <div className="bench-content" ref={provided.innerRef} {...provided.droppableProps}>
+                                    {benchBricks.map((el, index) => (
+                                        <React.Fragment key={index}>
+                                            {index !== 0 && ( 
+                                                <div
+                                                    className="bench-gap"
+                                                    style={{
+                                                        width: `${(gaps / benchLength) * 600}px`,
+                                                        backgroundColor: gaps >= minGap && gaps <= maxGap ? "transparent" : "rgba(209, 48, 48, 0.59)"
+                                                    }}
+                                                ></div>
+                                            )}
+                                            <Draggable draggableId={`${index}`} index={index}>
+                                                {(provided) => (
+                                                    <div
+                                                        className="bench-brick"
+                                                        ref={provided.innerRef}
+                                                        {...provided.draggableProps}
+                                                        {...provided.dragHandleProps}
+                                                        style={{
+                                                            width: `${(el / benchLength) * 600}px`,
+                                                            backgroundColor: getBrickColor(widths.indexOf(el)),
+                                                            ...provided.draggableProps.style
+                                                        }}
+                                                        onClick={() => removeBrick(index)}
+                                                    >
+                                                        {el}
+                                                    </div>
+                                                )}
+                                            </Draggable>
+                                        </React.Fragment>
+                                    ))}
+                                    {provided.placeholder}
+                                </div>
+                            )}
+                        </Droppable>
+                    </DragDropContext>
+                </div>
+            </div>
 
             <div className="toolbox-label">Summary: {getBrickSummary()}</div>
 

@@ -2,7 +2,7 @@
 
 ### Overview
 
-BenchMaker 3000 is a visual tool designed to help furniture estimators and designers determine how standardized wooden beams fit within a given bench width.
+BenchMaker 3000 is a visual tool designed to help with furniture estimating, to determine how standardized wooden beams fit within a given bench width.
 
 While this calculation can be done programmatically, raw numbers don’t provide an intuitive sense of symmetry. Additionally, the logic for optimal beam arrangement can be complex, involving recursion, material preferences (e.g., wider slats are easier to work with and more cost-effective), and ensuring visual uniformity and aesthetics.
 
@@ -23,9 +23,22 @@ While this calculation can be done programmatically, raw numbers don’t provide
 ### Technology Stack
 
 🛠 Next.js & React – Core framework for building the UI.
+
 📦 @hello-pangea/dnd – Enables smooth drag-and-drop functionality.
 
 ### License
 
 * This project is licensed under the MIT License.
 * This project uses @hello-pangea/dnd, which is also licensed under the MIT License.
+
+### Notes
+
+* Slat/brick sizes are hardcoded right now, but system is flexible enough to accept and colorize any sort of array
+
+### Changelog
+
+0.1.1: 
+
+* reworked spacing to use virutal gaps and fixed bench size (to better see unused space)
+* numerous CSS fixes
+* Numeric and visual indicator for leftover planks to see if they still fit
