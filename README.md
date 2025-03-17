@@ -35,6 +35,10 @@ While this calculation can be done programmatically, raw numbers don’t provide
 
 * Slat/brick sizes are hardcoded right now, but system is flexible enough to accept and colorize any sort of array
 
+### Screens
+
+![product screenshot](image-1.png)
+
 ### Changelog
 
 0.1.1: 
