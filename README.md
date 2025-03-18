@@ -46,3 +46,7 @@ While this calculation can be done programmatically, raw numbers don’t provide
 * Reworked spacing to use virutal gaps and fixed bench size (to better see unused space)
 * Numerous CSS fixes
 * Numeric and visual indicator for leftover planks to see if they still fit
+
+0.1.2
+
+* Made brick/slat array dynamic, implemented add button and two presets
