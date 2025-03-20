@@ -22,7 +22,7 @@ const ToolBox = () => {
     const getBrickColor = (index) => `hsl(${(index * (360 / brickSizes.length)) % 360}, 40%, 60%)`;
 
     // Add one brick to benchBricks (normal click)
-    const useBrick = (brick) => {
+    const addBrick = (brick) => {
         const usedLength = benchBricks.reduce((sum, el) => sum + el, 0);
         const remainingSpace = benchLength - usedLength - brick;
         const newBricksCount = benchBricks.length + 1;
@@ -197,7 +197,7 @@ const ToolBox = () => {
                                 opacity: isDisabled ? 0.2 : 1,
                                 cursor: isDisabled ? "not-allowed" : "pointer" 
                             }}
-                            onClick={() => !isDisabled && useBrick(brick)}
+                            onClick={() => !isDisabled && addBrick(brick)}
                             onContextMenu={(e) => {
                                 e.preventDefault();
                                 if (!isDisabled) {
