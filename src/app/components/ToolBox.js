@@ -36,17 +36,35 @@ const ToolBox = () => {
         setBenchBricks((prev) => [...prev, brick]);
     };
 
+    const clearBench = () => {
+        setBenchBricks([]);
+    }
 
     const fillRemainingWithBrick = (brick) => {
         let currentBricks = [...benchBricks];
-
+    
         while (true) {
-            const usedLength = currentBricks.reduce((sum, el) => sum + el, 0);
-            if (benchLength - usedLength < brick) break;
-            currentBricks.push(brick);
+            const used = currentBricks.reduce((sum, el) => sum + el, 0);
+            const n = currentBricks.length;
+    
+            if (n === 0) {
+                if (brick <= benchLength) {
+                    currentBricks.push(brick);
+                } else {
+                    break;
+                }
+            } else {
+
+                if (used + brick + n * minGap <= benchLength) {
+                    currentBricks.push(brick);
+                } else {
+                    break;
+                }
+            }
         }
         setBenchBricks(currentBricks);
     };
+    
 
     const removeBrick = (index) => {
         setBenchBricks((prev) => prev.filter((_, i) => i !== index));
@@ -214,6 +232,8 @@ const ToolBox = () => {
             <div className="toolbox-label">
                 Bench length is currently {benchLength}mm / Used length: {usedLength}mm
             </div>
+
+            <button className="preset-button" onClick={()=>clearBench()}>Clear</button>
 
             {/* Remaining Length Box with Progress Bar */}
             <div className="remaining-length-box">

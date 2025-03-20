@@ -5,10 +5,13 @@
 
 body {
     margin-bottom: var(--default-margin-bottom);
+    background-color: rgb(32, 32, 32);
     /*overflow-y: none;*/
 }
 
 .main {
+    background-color: rgb(32, 32, 32);
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -179,6 +182,7 @@ body {
 }
 
 .preset-button {
+    color: white;
     background-color: rgb(47, 43, 51);
     min-height: 28px;
     font-size: medium;
@@ -214,6 +218,7 @@ body {
     border: 1px solid rgb(99, 98, 98);
     margin: 6px;
     padding: 6px;
+    color: white;
     border-radius: 6px;
     transition: background ease-in 0.3s;
 }
@@ -221,6 +226,7 @@ body {
 .brick-size-remove-button:hover {
     border: 1px solid rgb(156, 156, 156);
     background-color: blueviolet;
+    color: white;
     margin: 6px;
     padding: 6px;
     border-radius: 6px;

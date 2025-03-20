@@ -52,3 +52,9 @@ While this calculation can be done programmatically, raw numbers don’t provide
 * Made brick/slat array dynamic, implemented add button and two presets
 * Right click now tries to fill remaining space with clicked brick
 * Added helper text
+
+0.1.3
+
+* Added clear button
+* Fixed brick auto-fill to respect minimum gap
+* Removed media enquiries from CSS
