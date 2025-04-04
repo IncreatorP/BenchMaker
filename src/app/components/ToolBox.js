@@ -3,7 +3,59 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import "../css/toolbox.css";
 
+const translations = {
+  en: {
+    title: "Bench Maker 3000!",
+    benchLength: "Bench Length:",
+    minGap: "Min Gap (mm):",
+    maxGap: "Max Gap (mm):",
+    preset145: "145 Preset",
+    preset142: "142 Preset",
+    addBrickSizePlaceholder: "Add new size",
+    addBrickSizeButton: "Add Brick Size",
+    hint1: "Left click on toolbox to add bricks to the bench",
+    hint2: "Right click on toolbox to fill remaining space with selected brick",
+    hint3: "Left click on bench display to remove bricks from bench",
+    hint4: "Drag the bricks on bench to move them around",
+    benchInfo: (benchLength, usedLength) => `Bench length is currently ${benchLength}mm / Used length: ${usedLength}mm`,
+    clear: "Clear",
+    remainingLength: "Remaining length:",
+    gapSize: "Gap size:",
+    summary: "Summary:",
+    slat: "slat",
+    slats: "slats",
+    en: "EN",
+    ru: "RU"
+  },
+  ru: {
+    title: "Скамейка 3000!",
+    benchLength: "Длина скамейки:",
+    minGap: "Минимальный зазор (мм):",
+    maxGap: "Максимальный зазор (мм):",
+    preset145: "Пресет 145",
+    preset142: "Пресет 142",
+    addBrickSizePlaceholder: "Добавить новый размер",
+    addBrickSizeButton: "Добавить размер кирпича",
+    hint1: "Левый клик по панели для добавления кирпичей на скамейку",
+    hint2: "Правый клик по панели для заполнения оставшегося пространства выбранным кирпичом",
+    hint3: "Левый клик по скамейке для удаления кирпичей",
+    hint4: "Перетащите кирпичи на скамейке, чтобы изменить их порядок",
+    benchInfo: (benchLength, usedLength) => `Длина скамейки: ${benchLength}мм / Использовано: ${usedLength}мм`,
+    clear: "Очистить",
+    remainingLength: "Оставшаяся длина:",
+    gapSize: "Размер зазора:",
+    summary: "Итог:",
+    slat: "лист",
+    slats: "листа",
+    en: "АНГ",
+    ru: "РУС"
+  }
+};
+
 const ToolBox = () => {
+    const [lang, setLang] = useState("en");
+    const t = translations[lang];
+
     const [benchLength, setBenchLength] = useState(1000);
     const [benchBricks, setBenchBricks] = useState([]);
     const [remainingLength, setRemainingLength] = useState(benchLength);
@@ -38,7 +90,7 @@ const ToolBox = () => {
 
     const clearBench = () => {
         setBenchBricks([]);
-    }
+    };
 
     const fillRemainingWithBrick = (brick) => {
         let currentBricks = [...benchBricks];
@@ -54,7 +106,6 @@ const ToolBox = () => {
                     break;
                 }
             } else {
-
                 if (used + brick + n * minGap <= benchLength) {
                     currentBricks.push(brick);
                 } else {
@@ -64,7 +115,6 @@ const ToolBox = () => {
         }
         setBenchBricks(currentBricks);
     };
-    
 
     const removeBrick = (index) => {
         setBenchBricks((prev) => prev.filter((_, i) => i !== index));
@@ -83,9 +133,9 @@ const ToolBox = () => {
         return (
             <ul className="summary-list">
                 {Object.entries(count).map(([size, num]) => (
-                    <li key={size}>{num} slat{num > 1 ? "s" : ""} of {size}mm</li>
+                    <li key={size}>{num} {num > 1 ? t.slats : t.slat} of {size}mm</li>
                 ))}
-                <li><strong>Gap size:</strong> {gaps.toFixed(2)}mm</li>
+                <li><strong>{t.gapSize}</strong> {gaps.toFixed(2)}mm</li>
             </ul>
         );
     };
@@ -124,13 +174,22 @@ const ToolBox = () => {
         }
     };
 
+    const toggleLanguage = () => {
+      setLang((prev) => (prev === "en" ? "ru" : "en"));
+    };
+
     return (
         <>
-            <div className="toolbox-title">Bench Maker 3000!</div>
+            <div className="language-toggle">
+                <button className="preset-button" onClick={toggleLanguage}>
+                    {lang === "en" ? t.ru : t.en}
+                </button>
+            </div>
+            <div className="toolbox-title">{t.title}</div>
 
             <div className="input-row">
                 <div className="input-group">
-                    <label className="toolbox-label">Bench Length:</label>
+                    <label className="toolbox-label">{t.benchLength}</label>
                     <input
                         type="number"
                         value={benchLength}
@@ -139,7 +198,7 @@ const ToolBox = () => {
                     />
                 </div>
                 <div className="input-group">
-                    <label className="toolbox-label">Min Gap (mm):</label>
+                    <label className="toolbox-label">{t.minGap}</label>
                     <input
                         type="number"
                         value={minGap}
@@ -148,7 +207,7 @@ const ToolBox = () => {
                     />
                 </div>
                 <div className="input-group">
-                    <label className="toolbox-label">Max Gap (mm):</label>
+                    <label className="toolbox-label">{t.maxGap}</label>
                     <input
                         type="number"
                         value={maxGap}
@@ -160,19 +219,19 @@ const ToolBox = () => {
 
             {/* Preset buttons and dynamic brick size editing */}
             <div className="preset-button-row">
-                <button className="preset-button" onClick={applyPreset145}>145 Preset</button>
-                <button className="preset-button"onClick={applyPreset142}>142 Preset</button>
+                <button className="preset-button" onClick={applyPreset145}>{t.preset145}</button>
+                <button className="preset-button" onClick={applyPreset142}>{t.preset142}</button>
             </div>
 
             <div className="brick-sizes-editor">
-
                 <div className="brick-size-element">
                     {brickSizes.map((size, idx) => (
                         <div className="brick-size" key={idx}>
                             <div>
-                            {size} 
-                            {/* Optionally you can add a remove button for dynamic adjustment */}
-                            <button className="brick-size-remove-button" onClick={() => setBrickSizes(brickSizes.filter((_, i) => i !== idx))}>Remove</button>
+                                {size} 
+                                <button className="brick-size-remove-button" onClick={() => setBrickSizes(brickSizes.filter((_, i) => i !== idx))}>
+                                    Remove
+                                </button>
                             </div>
                         </div>
                     ))}
@@ -180,25 +239,24 @@ const ToolBox = () => {
             </div>
 
             <div className="add-brick-size-container">
-            <input
+                <input
                     type="number"
                     value={newSize}
                     onChange={(e) => setNewSize(e.target.value)}
-                    placeholder="Add new size"
+                    placeholder={t.addBrickSizePlaceholder}
                     className="toolbox-input"
                 />
-                <button className="preset-button" onClick={handleAddNewSize}>Add Brick Size</button>
+                <button className="preset-button" onClick={handleAddNewSize}>{t.addBrickSizeButton}</button>
             </div>
 
             <div className="hint-text">
                 <ul>
-                <li>Left click on toolbox to add bricks to the bench</li>
-                <li>Right click on toolbox to fill remaining space with selected brick</li>
-                <li>Left click on bench display to remove bricks from bench</li>
-                <li>Drag the bricks on bench to move them around</li>                
+                    <li>{t.hint1}</li>
+                    <li>{t.hint2}</li>
+                    <li>{t.hint3}</li>
+                    <li>{t.hint4}</li>                
                 </ul>
             </div>
-
 
             <div className="toolbox-frame">
                 {brickSizes.map((brick, index) => {
@@ -230,14 +288,14 @@ const ToolBox = () => {
             </div>
 
             <div className="toolbox-label">
-                Bench length is currently {benchLength}mm / Used length: {usedLength}mm
+                {t.benchInfo(benchLength, usedLength)}
             </div>
 
-            <button className="preset-button" onClick={()=>clearBench()}>Clear</button>
+            <button className="preset-button" onClick={clearBench}>{t.clear}</button>
 
             {/* Remaining Length Box with Progress Bar */}
             <div className="remaining-length-box">
-                <div className="toolbox-label">Remaining length: {remainingLength}mm</div>
+                <div className="toolbox-label">{t.remainingLength} {remainingLength}mm</div>
                 <div className="progress-bar">
                     <div
                         className="progress-fill"
@@ -247,7 +305,7 @@ const ToolBox = () => {
                         }}
                     ></div>
                 </div>
-                <div className="toolbox-label">Gap size: {gaps.toFixed(2)}mm</div>
+                <div className="toolbox-label">{t.gapSize} {gaps.toFixed(2)}mm</div>
             </div>
 
             <div className="bench-wrapper">
@@ -297,7 +355,7 @@ const ToolBox = () => {
                 </div>
             </div>
 
-            <div className="toolbox-label">Summary: {getBrickSummary()}</div>
+            <div className="toolbox-label">{t.summary} {getBrickSummary()}</div>
         </>
     );
 };

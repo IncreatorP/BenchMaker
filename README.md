@@ -58,3 +58,7 @@ While this calculation can be done programmatically, raw numbers don’t provide
 * Added clear button
 * Fixed brick auto-fill to respect minimum gap
 * Removed media enquiries from CSS
+
+0.1.4
+
+* Added russian translation
